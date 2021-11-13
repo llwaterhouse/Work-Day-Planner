@@ -101,7 +101,7 @@ function updateTimeBlockText() {
 	}
 }
 
-// Let's get the ball rolling!
+// set up header, restore saved text, color code text areas and set up event listeners
 function init() {
 	// Set initial time in the header and then set interval to update it periodically
 	setTimeInLead();
@@ -119,5 +119,5 @@ function init() {
 	updateTimeBlockText();
 }
 
-// Let's 5get the ball rolling
+// Let's get the ball rolling!
 init();
