@@ -25,6 +25,24 @@ A simple planner where you can enter tasks in areas during the work hours and sa
 
 * Each minute, the time is checked and if we are into a new hour, the background of the text boxes update.
 
+## Anomalies
+
+* On my local computer I don't get any errors in the console when I load the page.  However, when I uploaded to GitHub, my deployed page gets the following warnings
+    * DevTools failed to load source map: Could not load content for chrome-extension://liecbddmkiiihnedobmlmillhodjkdmb/js/content.js.map: HTTP error: status code 404, net::ERR_UNKNOWN_URL_SCHEME
+
+    * DevTools failed to load source map: Could not load content for chrome-extension://liecbddmkiiihnedobmlmillhodjkdmb/js/intercom-link-expand-loader.js.map: HTTP error: status code 404, net::ERR_UNKNOWN_URL_SCHEME
+
+After researching, I found out it has something to do with Chrome adding support for source maps.  To remove this warning, do the following:
+
+
+    Go to the developer tools (F12 in the browser), and go to Settings.
+
+    Then, look for Sources, and disable the options:
+
+    "Enable JavaScript source maps"
+    "Enable CSS source maps"
+
+The warnings then went away on my console
 
 ## Built With
 
