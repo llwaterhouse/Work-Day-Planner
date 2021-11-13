@@ -3,7 +3,7 @@ const endHour = 14; // using 24hour time
 
 // gets current time and displays it in the header
 function updateTimeInLead() {
-	var today = moment().format('dddd, MMMM Do YYYY, h:mm:ss a');
+	var today = moment().format('dddd, MMMM Do YYYY, h:mm a');
 
 	$('#currentDay').text(today);
 }
@@ -48,15 +48,12 @@ function updateBlockColors() {
 		// check if the time has past or not, set color
 		if (curHour == time) {
 			//set time block to present color
-			console.log('Set present curhour ' + curHour + 'time ' + time);
 			timeBlock.classList.add('present');
 		} else if (curHour < time) {
 			//set time block to future
-			console.log('Set Future curhour ' + curHour + 'time ' + time);
 			timeBlock.classList.add('future');
 		} else {
 			//set time block to past
-			console.log('Set past curhour ' + curHour + 'time ' + time);
 			timeBlock.classList.add('past');
 		}
 	}
@@ -84,7 +81,7 @@ function saveDescription(event) {
 	text = $(curTextArea).val().trim();
 
 	// save key and user's text to local Storage. The row's time is in the id field.
-	localStorage.setItem('PlannerHour ' + curTextArea.id, text);
+	localStorage.setItem('PlannerHour' + curTextArea.id, text);
 }
 
 // Let's get the ball rolling!
@@ -94,15 +91,31 @@ function init() {
 
 	// Sets the colors of the text areas depending on whether they are past present or future.
 	setBlockColors();
-	// Add event listener to all save buttons
 
+	// Add event listener to all save buttons
 	var elements = document.getElementsByClassName('saveBtn');
 	for (var i = 0; i < elements.length; i++) {
 		elements[i].addEventListener('click', saveDescription);
 	}
 
-	// read storage
-	// set description
+    var curText;
+    var curItem;
+    var curTextArea;
+	// read storage to see if any saved text and then set text in corresponding time block.
+    for (var i = startHour; i<endHour; i++){
+        curItem = "PlannerHour" + i.toString();
+        console.log("CurItem "  + curItem);
+        curText = localStorage.getItem(curItem);
+        console.log(curText);
+        if (curText != null) {
+            // There is a stored key for that id, fill in text area
+
+            curTextArea = document.getElementById(i);
+            curTextArea.textContent = curText;
+            console.log(curTextArea.textContent);
+
+        }
+    }
 
 	// // OR
 	// var saveButton = $(".saveBtn");
