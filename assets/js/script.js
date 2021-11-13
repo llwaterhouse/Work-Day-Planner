@@ -1,5 +1,5 @@
 const startHour = 9;
-const endHour = 14; // using 24hour time
+const endHour = 17; // using 24hour time
 
 // gets current time and displays it in the header
 function updateTimeInLead() {
@@ -20,7 +20,7 @@ function setTimeInLead() {
 function updateBlockColors() {
 	// get current hour in 24 hour time
 	var curHour = moment().format('H');
-	curHour = 13;
+	
 	var timeBlock;
 	var timeBlock2;
 
@@ -32,8 +32,7 @@ function updateBlockColors() {
 	//Go through all time blocks from startHour to endHour 24 hour time
 	// and change color
 	for (var time = startHour; time <= endHour; time++) {
-
-        // TODO find out why jQuery not working
+		// TODO find out why jQuery not working
 		// timeBlock = $("#" + time.toString());
 		// console.log(timeBlock.val());
 		// if (curHour == time) {
@@ -44,7 +43,7 @@ function updateBlockColors() {
 		// }
 
 		timeBlock = document.getElementById(time.toString());
-		
+
 		// check if the time has past or not, set color
 		if (curHour == time) {
 			//set time block to present color
@@ -69,8 +68,7 @@ function setBlockColors() {
 
 // save time block's data in local storage
 function saveDescription(event) {
-	console.log('clicked s: ' + event.target);
-	console.log(event.target.previousElementSibling.id);
+
 	//check if there's any text
 	//save to local storage use Id, description
 
@@ -82,6 +80,25 @@ function saveDescription(event) {
 
 	// save key and user's text to local Storage. The row's time is in the id field.
 	localStorage.setItem('PlannerHour' + curTextArea.id, text);
+}
+
+// read storage to see if any saved text and then set text in corresponding time block.
+function updateTimeBlockText() {
+	var curText;
+	var curItem;
+	var curTextArea;
+
+	for (var i = startHour; i <= endHour; i++) {
+		curItem = 'PlannerHour' + i.toString();
+		curText = localStorage.getItem(curItem);
+
+		if (curText != null) {
+			// There is a stored key for that id, fill in text area
+			curTextArea = document.getElementById(i);
+			curTextArea.textContent = curText;
+
+		}
+	}
 }
 
 // Let's get the ball rolling!
@@ -98,30 +115,8 @@ function init() {
 		elements[i].addEventListener('click', saveDescription);
 	}
 
-    var curText;
-    var curItem;
-    var curTextArea;
-	// read storage to see if any saved text and then set text in corresponding time block.
-    for (var i = startHour; i<endHour; i++){
-        curItem = "PlannerHour" + i.toString();
-        console.log("CurItem "  + curItem);
-        curText = localStorage.getItem(curItem);
-        console.log(curText);
-        if (curText != null) {
-            // There is a stored key for that id, fill in text area
-
-            curTextArea = document.getElementById(i);
-            curTextArea.textContent = curText;
-            console.log(curTextArea.textContent);
-
-        }
-    }
-
-	// // OR
-	// var saveButton = $(".saveBtn");
-	// saveButton.click(function() {
-	// var results = this.
-	//  })
+	// See if there are stored entries and restore them
+	updateTimeBlockText();
 }
 
 // Let's 5get the ball rolling
