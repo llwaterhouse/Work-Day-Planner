@@ -22,36 +22,41 @@ function updateBlockColors() {
 	var curHour = moment().format('H');
 	curHour = 13;
 	var timeBlock;
+	var timeBlock2;
 
-	//Go through all time blocks from 9am to 5pm 24 hour time
+	// remove old color classes from all text areas
+	$('.description').removeClass('past');
+	$('.description').removeClass('present');
+	$('.description').removeClass('future');
+
+	//Go through all time blocks from startHour to endHour 24 hour time
 	// and change color
 	for (var time = startHour; time <= endHour; time++) {
-		// TODO Change to jQuery?
 
-        // remove old color classes from all text areas
-        $(".description").removeClass("past");
-        $(".description").removeClass("preset");       
-        $(".description").removeClass("future");
+        // TODO find out why jQuery not working
+		// timeBlock = $("#" + time.toString());
+		// console.log(timeBlock.val());
+		// if (curHour == time) {
+		//     console.log("setting present")
+		//     $("#" + time.toString()).addClass("present");
 
-   		timeBlock = document.getElementById(time.toString());
+		//     $("#" + time.toString()).attr("class", "present");
+		// }
 
-
+		timeBlock = document.getElementById(time.toString());
+		
 		// check if the time has past or not, set color
 		if (curHour == time) {
 			//set time block to present color
-			// remove others?
-			timeBlock.classList.remove('past');
-			timeBlock.classList.remove('future');
+			console.log('Set present curhour ' + curHour + 'time ' + time);
 			timeBlock.classList.add('present');
 		} else if (curHour < time) {
 			//set time block to future
-			timeBlock.classList.remove('present');
-			timeBlock.classList.remove('past');
+			console.log('Set Future curhour ' + curHour + 'time ' + time);
 			timeBlock.classList.add('future');
 		} else {
 			//set time block to past
-			timeBlock.classList.remove('present');
-			timeBlock.classList.remove('future');
+			console.log('Set past curhour ' + curHour + 'time ' + time);
 			timeBlock.classList.add('past');
 		}
 	}
@@ -79,7 +84,7 @@ function saveDescription(event) {
 	text = $(curTextArea).val().trim();
 
 	// save key and user's text to local Storage. The row's time is in the id field.
-	localStorage.setItem("PlannerHour " + curTextArea.id, text);
+	localStorage.setItem('PlannerHour ' + curTextArea.id, text);
 }
 
 // Let's get the ball rolling!
