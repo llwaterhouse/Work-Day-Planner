@@ -1,16 +1,3 @@
-/* body {
-	font-family: 'Open Sans', sans-serif;
-	font-size: 16px;
-	line-height: 1;
-
-	 background-image: url("../images/transparent-background.png");
-  background-color:bisque;
-  opacity: 0.70; 
-	background-size: cover;
-	 background-repeat: no-repeat;
-	background-attachment: scroll;
-	/* background-image: url("../images/transparent-beige.png"); 
-} */
 
 body {
 	font-family: 'Open Sans', sans-serif;
@@ -24,7 +11,7 @@ body {
 	 background-repeat: no-repeat;
 	background-attachment: scroll;
 }
-
+/* Where the user will type in */
 textarea {
 	background: transparent;
 	border: none;
@@ -32,6 +19,10 @@ textarea {
 	border-left: 1px solid black;
 	padding: 10px;
 }
+textarea:hover {
+  filter:brightness(125%);
+}
+
 
 /*  Top header area */
 .jumbotron {
@@ -58,13 +49,11 @@ textarea {
 color: bisque;
 }
 
+/* used in textarea */
 .description {
 	white-space: pre-wrap;
 }
 
-.description:hover {
-    backdrop-filter:brightness(120%);
-}
 
 .time-block {
 	text-align: center;
@@ -109,11 +98,13 @@ color: bisque;
 	border-bottom-right-radius: 15px;
 	/* background-color: #06aed5; */
   background-color: rgb(28, 91, 112);
+
 	color: white;
+  font-size: 2.0rem;
 }
 
 .saveBtn:hover {
-	font-size: 22px;
-	transition: all 0.3s ease-in-out;
+	font-size: 3rem;
+	transition: all 0.2s ease-in-out;
   /* backdrop-filter:brightness(120%); */
 }
