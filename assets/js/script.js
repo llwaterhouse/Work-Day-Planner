@@ -73,13 +73,26 @@ function saveDescription(event) {
 	//save to local storage use Id, description
 
 	// Find the associated textarea
-	var curTextArea = event.target.previousElementSibling;
+
+	//Because the save button has an icon in it, sometimes the event has the button, and sometimes it has the icon. Look for the appropriate text area
+
+
+	if (event.target.classList.contains("fas")) {
+		//we got the icon.  Have to look up one more
+
+		curTextArea = event.target.parentElement.previousElementSibling;
+	}
+	else{
+		var curTextArea = event.target.previousElementSibling;
+		}
 
 	// Remove leading/trailing white space
 	text = $(curTextArea).val().trim();
 
 	// save key and user's text to local Storage. The row's time is in the id field.
+	if (text!=""){
 	localStorage.setItem('PlannerHour' + curTextArea.id, text);
+	}
 }
 
 // read storage to see if any saved text and then set text in corresponding time block.
